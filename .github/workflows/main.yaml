@@ -4,6 +4,7 @@ on:
     branches: ["main"]
     paths:
       - "src/**"
+      - ".github/workflows/main.yaml"
   workflow_dispatch:
   
 jobs:
@@ -21,7 +22,7 @@ jobs:
         with: 
             file: ./src/Dockerfile
             push: true
-            tags:
+            tags: |
                 jancunha/conversao-temperatura:v${{ github.run_number }}
                 jancunha/conversao-temperatura:latest
 
