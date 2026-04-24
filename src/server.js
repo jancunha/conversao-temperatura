@@ -6,6 +6,8 @@ const bodyParser = require('body-parser');
 const config = require('./config/system-life');
 const path = require('path');
 
+// Teste de workflow
+
 app.use(config.middlewares.healthMid);
 app.use('/', config.routers);
 app.use(bodyParser.urlencoded({ extended: false }))
