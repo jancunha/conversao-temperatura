@@ -1,0 +1,27 @@
+name: CI-CD
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "src/**"
+  workflow_dispatch:
+  
+jobs:
+  CI:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6.0.2
+      - name: Autenticando no Docker Registry
+        uses: docker/login-action@v4.1.0
+        with:
+            username: ${{ secrets.DOCKERHUB_USR }}
+            password: ${{ secrets.DOCKERHUB_PWD }}
+      - name: Construindo a imagem Docker
+        uses: docker/build-push-action@v7.1.0
+        with: 
+            file: ./src/Dockerfile
+            push: true
+            tags:
+                jancunha/conversao-temperatura:v${{ github.run_number }}
+                jancunha/conversao-temperatura:latest
+
